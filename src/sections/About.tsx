@@ -97,7 +97,7 @@ export const AboutSection = () => {
       top: '70%'
     },
   ]
-  return <div className="pb-20">
+  return <section className="pb-20" id="about">
     <div className="container">
       <SectionHeader eyebrow="About Me" title="A Glimpse into My World" description="Learn more about who I am, what i do, and what inspires me." />
       <div className="mt-20 flex flex-col gap-8">
@@ -147,5 +147,5 @@ export const AboutSection = () => {
         </div>
       </div>
     </div>
-  </div>;
+  </section>;
 };
