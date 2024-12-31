@@ -1,3 +1,4 @@
+'use client'
 import memojiImage from '@/assets/images/memoji-computer.png'
 import Image from 'next/image';
 import ArrowDown from '@/assets/icons/arrow-down.svg'
@@ -5,6 +6,8 @@ import grainImage from '@/assets/images/grain.jpg'
 import StarIcon from '@/assets/icons/star.svg'
 import SparkleIcon from '@/assets/icons/sparkle.svg'
 import HeroOrbit from '@/components/HeroOrbit';
+import Link from 'next/link';
+import { Link as ScrollLink } from 'react-scroll';
 
 export const HeroSection = () => {
   return (
@@ -44,16 +47,15 @@ export const HeroSection = () => {
           <h1 className='font-serif text-3xl md:text-5xl text-center mt-8 tracking-wide'>Building Excptional User Experiences</h1>
           <p className='mt-4 text-center md:text-lg text-white/60'>Im an independent designer My interset lies in brand experience, and user experience</p>
         </div>
-        <div className='flex flex-col md:flex-row justify-center items-center mt-8 gap-4'>
-          <button className='inline-flex items-center gap-2 border border-white/15 px-6 h-12 rounded-xl'>
+        <div className='flex flex-col md:flex-row justify-center items-center mt-8 gap-4 '>
+          <ScrollLink smooth={true} to='projects' className='inline-flex items-center gap-2 border border-white/15 px-6 h-12 rounded-xl z-10 cursor-pointer'>
             <span className='font-semibold'>Explore My Work</span>
             <ArrowDown className='size-4' />
-          </button>
-          <button className='inline-flex items-center gap-2 border border-white bg-white text-gray-900 h-12 px-6 rounded-xl'>
+          </ScrollLink>
+          <Link href='contact' className='inline-flex items-center gap-2 border border-white z-10 bg-white text-gray-900 h-12 px-6 rounded-xl cursor-pointer'>
             <span className=''>👋</span>
             <span className='font-semibold'>Lets Connect</span>
-
-          </button>
+          </Link>
         </div>
       </div>
     </section>

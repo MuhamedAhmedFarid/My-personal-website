@@ -13,7 +13,7 @@ export const Header = () => {
           onClick={() =>setSelectedTab('home')}>
           Home
         </ScrollLink>
-        <ScrollLink smooth={true} to='projects' className={`nav-item ${selectedTab === 'projects' && 'nav-active'}`} onClick={() =>setSelectedTab('projects')} >Projects</ScrollLink>
+        <ScrollLink smooth={true}  to='projects' className={`nav-item ${selectedTab === 'projects' && 'nav-active'}`} onClick={() =>setSelectedTab('projects')} >Projects</ScrollLink>
         <ScrollLink smooth={true} to='about' className={`nav-item ${selectedTab === 'about' && 'nav-active' }`} onClick={() =>setSelectedTab('about')}>About</ScrollLink>
         <ScrollLink smooth={true} to='contact' className={`nav-item ${selectedTab === 'contact' && 'nav-active' }`} onClick={() =>setSelectedTab('contact')}>Contact</ScrollLink>
     </nav>
