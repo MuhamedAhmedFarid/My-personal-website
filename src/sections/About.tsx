@@ -11,7 +11,7 @@ import ReactIcon from '@/assets/icons/react.svg'
 
 import ChromeIcon from '@/assets/icons/chrome.svg'
 import GithubIcon from '@/assets/icons/github.svg'
-import mapImage from '@/assets/images/map.png'
+import mapImage from '@/assets/images/egyptmap.jpg'
 import smileMemoji from '@/assets/images/memoji-smile.png'
 import { CardHeader } from "@/components/CardHeader";
 import ToolboxItems from "@/components/ToolboxItems";

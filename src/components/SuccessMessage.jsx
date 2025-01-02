@@ -1,4 +1,4 @@
-const SuccessMessage = ({message}) => {
+const SuccessMessage = ({ message }) => {
   return (
     <div className="bg-green-200 px-6 py-4  my-4 rounded-md text-lg flex items-center mx-auto max-w-lg">
       <svg
