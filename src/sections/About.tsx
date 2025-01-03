@@ -59,7 +59,6 @@ export const AboutSection = () => {
       left: '50%',
       top: '5%'
     },
-
     {
       title: 'Hiking',
       emoji: '🗻',
@@ -83,12 +82,6 @@ export const AboutSection = () => {
       emoji: '🏋️‍♀️',
       left: '5%',
       top: '65%'
-    },
-    {
-      title: 'Fitness',
-      emoji: '🏋️‍♀️',
-      left: '5%',
-      top: '70%'
     },
     {
       title: 'Reading',
