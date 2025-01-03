@@ -2,132 +2,131 @@
 import Card from "@/components/Card";
 import { useState } from "react";
 import { useForm } from "@formspree/react";
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
+import {InputField} from "@/components/InputField";
+import {LoadingSpinner} from "@/components/LoadingSpinner";
+import {Alert} from "@/components/Alert";
 import z from "zod";
 
-const info = z.object({
+const contactSchema = z.object({
   name: z
     .string()
-    .min(3, { message: "Name must be more than 3 characters" })
+    .min(3, "Name must be more than 3 characters")
     .max(20),
-  email: z.string().email({ message: "Invalid email format" }),
+  email: z.string().email("Invalid email format"),
   message: z
     .string()
-    .min(10, { message: "Message must be more than 10 characters" })
+    .min(10, "Message must be more than 10 characters")
     .max(100),
 });
 
 const Contact = () => {
-  const router = useRouter()
-  const [error, setError] = useState(null);
-  const [errorField, setErrorField] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [succeeded, setSucceeded] = useState(false);
-  const [err, setErr] = useState(null);
-  const [state] = useForm("mvggvzky");
+  const router = useRouter();
+  const [formState, setFormState] = useState({
+    error: null,
+    errorField: null,
+    loading: false,
+    succeeded: false
+  });
+  const [formspreeState] = useForm("mvggvzky");
+  const [showAlert, setShowAlert] = useState({ show: false, message: '', type: '' });
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setFormState(prev => ({ ...prev, loading: true }));
 
     const formData = new FormData(e.target);
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      message: formData.get("message"),
-    };
+    const data = Object.fromEntries(formData);
 
-    const result = info.safeParse(data);
+    const validation = contactSchema.safeParse(data);
 
-    if (result.success) {
-      fetch("https://formspree.io/f/mvggvzky", {
+    if (!validation.success) {
+      const { message, path } = validation.error.errors[0];
+      setFormState(prev => ({
+        ...prev,
+        error: message,
+        errorField: path[0],
+        loading: false
+      }));
+      return;
+    }
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/${process.env.FORMSPREE_ID}`, {
         method: "POST",
         body: formData,
-        headers: {
-          Accept: "application/json",
-        },
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          }
-          throw new Error("Network response was not ok.");
-        })
-        .then((data) => {
-          setSucceeded(true);
-          setLoading(false);
-          setTimeout(() => {
-            router.push('/')
-          }, 1000);
-        })
-        .catch((error) => {
-        
-          setErr(error);
-          setLoading(false);
-          
-        });
-    } else {
-      setError(result.error.errors[0].message);
-      setErrorField(result.error.errors[0].path[0]);
-      setLoading(false);
-    }
-  }
+        headers: { Accept: "application/json" }
+      });
 
-  if (state.succeeded) {
-    return <p className="text-3xl text-green-200">Thanks for joining!</p>;
-  }
+      if (!response.ok) throw new Error("Network response was not ok.");
+
+      setFormState(prev => ({ ...prev, succeeded: true, loading: false }));
+      setShowAlert({ show: true, message: 'Message sent successfully!', type: 'success' });
+      setTimeout(() => {
+        router.push('/');
+      }, 2000);
+    } catch (error) {
+      setFormState(prev => ({
+        ...prev,
+        error: "Failed to send message",
+        loading: false
+      }));
+      setShowAlert({ show: true, message: 'Failed to send message', type: 'error' });
+    }
+  };
+
+  const { error, errorField, loading, succeeded } = formState;
 
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="h-screen flex justify-center items-center relative">
+      {showAlert.show && <Alert message={showAlert.message} type={showAlert.type} />}
       <Card className="w-[400px]">
-        <form className="" onSubmit={handleSubmit}>
-          <div className="flex flex-col mt-1 text-xs leading-5">
-            <label className="block text-gray-500 mb-1 text-xl">Name</label>
-            <input
-              type="text"
-              placeholder="Joe Doe"
-              name="name"
-              className="w-full rounded-md border text-lg border-white/15 font-medium focus:border-purple-400 outline-none bg-gray-900 py-2 px-4 text-gray-200"
-            />
-            {errorField === "name" && (
-              <p className="text-red-500 text-xs mt-2">{error}</p>
-            )}
-          </div>
-          <div className="flex flex-col mt-1 text-xs leading-5">
-            <label className="block text-gray-500 mb-1 text-xl">Email</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="example@gmail.com"
-              className="w-full rounded-md border text-lg border-white/15 font-medium focus:border-purple-400 outline-none bg-gray-900 py-2 px-4 text-gray-200"
-            />
-            {errorField === "email" && (
-              <p className="text-red-500 text-xs mt-2">{error}</p>
-            )}
-          </div>
-          <div className="flex flex-col mt-1 text-xs leading-5">
-            <label className="block text-gray-500 mb-1 text-xl">Message</label>
-            <textarea
-              name="message"
-              rows={4}
-              placeholder="Enter your message here"
-              className="w-full rounded-md border text-lg border-white/15 font-medium focus:border-purple-400 outline-none bg-gray-900 py-2 px-4 text-gray-200"
-            />
-            {errorField === "message" && (
-              <p className="text-red-500 text-xs mt-2">{error}</p>
-            )}
-          </div>
+        <form onSubmit={handleSubmit}>
+          <InputField
+            label="Name"
+            type="text"
+            name="name"
+            placeholder="Joe Doe"
+            error={errorField === "name" ? error : null}
+          />
+          <InputField
+            label="Email"
+            type="email"
+            name="email"
+            placeholder="example@gmail.com"
+            error={errorField === "email" ? error : null}
+          />
+          <InputField
+            label="Message"
+            type="textarea"
+            name="message"
+            placeholder="Enter your message here"
+            error={errorField === "message" ? error : null}
+          />
           <button
-            disabled={state.submitting || loading}
-            className="text-white bg-gray-900 inline-flex items-center border border-gray-900 px-6 h-12 mt-4 rounded-xl gap-2"
+            disabled={formspreeState.submitting || loading}
+            className={`w-full inline-flex items-center justify-center h-12 mt-4 rounded-xl gap-2 transition-all duration-300 ${
+              loading || succeeded
+                ? 'bg-emerald-500 text-white'
+                : 'bg-gray-900 text-white hover:bg-gray-800'
+            }`}
           >
-            {loading ? "Loading..." : "Submit"}
+            {loading ? (
+              <>
+                <LoadingSpinner />
+                Sending...
+              </>
+            ) : succeeded ? (
+              <>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Sent!
+              </>
+            ) : (
+              'Submit'
+            )}
           </button>
-          {succeeded && (
-            <p className="text-green-500 mt-2">
-              Message sent successfully. Redirecting back to the home page...
-            </p>
-          ) }
         </form>
       </Card>
     </div>
@@ -135,3 +134,14 @@ const Contact = () => {
 };
 
 export default Contact;
+// import { ContactForm } from "./form";
+// function Contact() {
+//   return (
+//     <div>
+//       <ContactForm />
+//     </div>
+//   )
+    
+// }
+
+// export default Contact;
