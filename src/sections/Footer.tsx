@@ -2,7 +2,7 @@ import ArrowUpRightIcon from "@/assets/icons/arrow-up-right.svg";
 const footerLinks = [
   {
     title: "Facebook",
-    href: "#",
+    href: "https://www.facebook.com/share/1B6NkPDmg6/",
   },
   {
     title: "Twitter",

@@ -21,7 +21,7 @@ export const Header = () => {
           onSetActive={() => setSelectedTab("home")}
           className={`nav-item ${selectedTab === "home" && "nav-active"}`}
         >
-          Homeeeeeeeeee
+          Home
         </ScrollLink>
         <ScrollLink
           spy={true}
