@@ -52,12 +52,13 @@ const Contact = () => {
     }
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("https://formspree.io/f/mvggvzky", {
+        method: "POST",
         body: formData,
+        headers: { Accept: "application/json" }
       });
 
-      if (!response.ok) throw new Error('Network response was not ok');
+      if (!response.ok) throw new Error("Network response was not ok.");
 
       setFormState(prev => ({ ...prev, succeeded: true, loading: false }));
       setShowAlert({ show: true, message: 'Message sent successfully!', type: 'success' });
@@ -67,7 +68,7 @@ const Contact = () => {
     } catch (error) {
       setFormState(prev => ({
         ...prev,
-        error: 'Failed to send message',
+        error: "Failed to send message",
         loading: false
       }));
       setShowAlert({ show: true, message: 'Failed to send message', type: 'error' });
