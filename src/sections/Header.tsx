@@ -15,7 +15,7 @@ export const Header = () => {
         <ScrollLink
           spy={true}
           smooth={true}
-          to="home"
+          to="Eshta3'l aboos edk"
           // offset={-100}
           // duration={500}
           onSetActive={() => setSelectedTab("home")}
