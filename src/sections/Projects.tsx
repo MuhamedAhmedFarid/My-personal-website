@@ -1,13 +1,13 @@
 import darkSaasLandingPage from "@/assets/images/dark-saas-landing-page.png";
 import lightSaasLandingPage from "@/assets/images/light-saas-landing-page.png";
-import hotel from "@/assets/images/hotel.png";
+import hotel from "@/assets/images/hotelImg.png";
 import aiStartupLandingPage from "@/assets/images/ai-startup-landing-page.png";
 import Image from "next/image";
 import CheckIcon from '@/assets/icons/check-circle.svg'
 import ArrowUpRight from '@/assets/icons/arrow-up-right.svg'
 import grainImage from '@/assets/images/grain.jpg'
 import SectionHeader from "@/components/SectionHeader";
-import solraImg from '@/assets/images/boxByld.png'
+import solraImg from '@/assets/images/boxByldImg.png'
 import Card from "@/components/Card";
 const portfolioProjects = [
   {
