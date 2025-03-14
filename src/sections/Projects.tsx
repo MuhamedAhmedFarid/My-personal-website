@@ -63,7 +63,7 @@ export const ProjectsSection = () => {
               <div className="lg:pb-16">
                 <div className="bg-gradient-to-r from-emerald-300 to-sky-400 gap-2 inline-flex font-bold uppercase tracking-widest text-sm text-transparent bg-clip-text">
                 <span>{project.company}</span>
-                <span>&bull;</span>
+                <span>.</span>
                 <span>{project.year}</span>
               </div>
 
