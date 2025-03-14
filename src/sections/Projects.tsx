@@ -6,44 +6,46 @@ import CheckIcon from '@/assets/icons/check-circle.svg'
 import ArrowUpRight from '@/assets/icons/arrow-up-right.svg'
 import grainImage from '@/assets/images/grain.jpg'
 import SectionHeader from "@/components/SectionHeader";
+import solraImg from '@/assets/images/Capture.png'
+import hotelImg from '@/assets/images/Capture2.png'
 import Card from "@/components/Card";
 const portfolioProjects = [
   {
-    company: "Acme Corp",
-    year: "2022",
-    title: "Dark Saas Landing Page",
+    company: "The wild oasis",
+    year: "2025",
+    title: "Hotel booking management system.",
     results: [
       { title: "Enhanced user experience by 40%" },
       { title: "Improved site speed by 50%" },
       { title: "Increased mobile traffic by 35%" },
     ],
-    link: "https://tripy22.netlify.app/",
-    image: darkSaasLandingPage,
+    link: "https://thewild0asis.netlify.app/dashboard",
+    image: hotelImg,
   },
   {
-    company: "Innovative Co",
-    year: "2021",
-    title: "Light Saas Landing Page",
+    company: "BoxBYLD",
+    year: "2024",
+    title: "Solar workforce collaboration and management.",
     results: [
       { title: "Boosted sales by 20%" },
       { title: "Expanded customer reach by 35%" },
       { title: "Increased brand awareness by 15%" },
     ],
-    link: "https://youtu.be/7hi5zwO75yc",
-    image: lightSaasLandingPage,
+    link: "https://www.technician.boxbyld.tech/home/homePage/",
+    image: solraImg,
   },
-  {
-    company: "Quantum Dynamics",
-    year: "2023",
-    title: "AI Startup Landing Page",
-    results: [
-      { title: "Enhanced user experience by 40%" },
-      { title: "Improved site speed by 50%" },
-      { title: "Increased mobile traffic by 35%" },
-    ],
-    link: "https://youtu.be/Z7I5uSRHMHg",
-    image: aiStartupLandingPage,
-  },
+  // {
+  //   company: "Quantum Dynamics",
+  //   year: "2023",
+  //   title: "AI Startup Landing Page",
+  //   results: [
+  //     { title: "Enhanced user experience by 40%" },
+  //     { title: "Improved site speed by 50%" },
+  //     { title: "Increased mobile traffic by 35%" },
+  //   ],
+  //   link: "https://youtu.be/Z7I5uSRHMHg",
+  //   image: aiStartupLandingPage,
+  // },
 ];
 
 export const ProjectsSection = () => {
