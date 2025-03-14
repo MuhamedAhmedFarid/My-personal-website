@@ -6,8 +6,8 @@ import CheckIcon from '@/assets/icons/check-circle.svg'
 import ArrowUpRight from '@/assets/icons/arrow-up-right.svg'
 import grainImage from '@/assets/images/grain.jpg'
 import SectionHeader from "@/components/SectionHeader";
-import solraImg from '@/assets/images/Capture.png'
-import hotelImg from '@/assets/images/Capture2.png'
+import solraImg from '@/assets/images/boxByld.png'
+import hotel from '@/assets/images/hotel.png'
 import Card from "@/components/Card";
 const portfolioProjects = [
   {
@@ -20,7 +20,7 @@ const portfolioProjects = [
       { title: "Increased mobile traffic by 35%" },
     ],
     link: "https://thewild0asis.netlify.app/dashboard",
-    image: hotelImg,
+    image: hotel,
   },
   {
     company: "BoxBYLD",
